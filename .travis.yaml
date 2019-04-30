@@ -11,3 +11,4 @@ before_install:
 
 script:
   - docker run ekevalo/docker-react npm run test -- --coverage
+  - bundle exec rake --verbose --trace
