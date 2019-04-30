@@ -1,3 +1,5 @@
+language: node_js
+
 sudo: required
 
 services:
@@ -9,4 +11,3 @@ before_install:
 
 script:
   - docker run ekevalo/docker-react npm run test -- --coverage
-  
