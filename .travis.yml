@@ -1,26 +1,16 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -t ekevalo/docker-react -f Dockerfile.dev .
-
+- openssl aes-256-cbc -K $encrypted_fa4b663dc460_key -iv $encrypted_fa4b663dc460_iv
+  -in coral-velocity-239303-3eaa829512de.json.enc -out coral-velocity-239303-3eaa829512de.json
+  -d
+- docker build -t ekevalo/docker-react -f Dockerfile.dev .
 script:
-  - docker run -e CI=true ekevalo/docker-react npm run test -- --watchAll=false
-
+- docker run -e CI=true ekevalo/docker-react npm run test -- --watchAll=false
 deploy:
-  provider: elasticbeanstalk
-  access_key_id: 
-    secure: "$AWS_ACCESS_KEY"
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
-  region: "us-east-2"  
-  app: "docker-react"
-  env: "DockerReact-env"
-  bucket_name: "elasticbeanstalk-us-east-2-893381778389"
-  bucket_path: "docker-react"
+  provider: gae
+  keyfile: coral-velocity-239303-3eaa829512de.json
+  project: coral-velocity-239303
   on:
-   branch: master
-
-
+    branch: master
