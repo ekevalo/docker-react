@@ -8,6 +8,6 @@ script:
 deploy:
   provider: gae
   keyfile: client-secret.json
-  project: coral-velocity-239303
+  project: docker-react
   on:
     branch: master
